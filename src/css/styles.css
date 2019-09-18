@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600&display=swap');
+@import './game.css';
 
 *,
 ::after,
@@ -18,7 +19,7 @@ main {
     margin: 0 auto;
     width: 60vw;
     height: 60vh;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -44,69 +45,10 @@ main {
     display: inherit;
     justify-content: inherit;
     align-items: inherit;
-}
-.section__div--play h3 {
-    font-size: 40px;
-    font-weight: 300;
-    color: #707070;
-}
-.section--play {
-    margin: 0 auto;
-    width: 65vw;
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.section__div--points {
-    width: 150px;
-    height: 50px;
-    background: #FFF;
-    display: flex;
-    justify-content: space-around;
-    align-self: flex-start;
-    margin: 0 30px;
-}
-.section__div--points h3,
-div {
-    line-height: 50px;
-    font-weight: 100;
-    font-size: 25px;
-}
-.div--play-container {
-    padding: 7% 0;
-    width: 55%;
-    height: 100%;
-    background: #4B73CE;
-    display: inherit;
-    justify-content: space-between;
-    align-items: inherit;
-    flex-direction: column;
-}
-.play--word {
-    width: 72%;
-    height: 38%;
-    background: #C4C4C4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.play--word h2 {
-    font-size: 50px;
-    font-weight: 200;
-    color: green;
-}
-.play--speak {
-    width: 72%;
-    height: 38%;
-    background: #3A3940;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
 }
-.play--speak h4 {
-    font-size: 40px;
-    font-weight: 100;
-    color: #DCDCDC;
+.section__div--play h3 {
+    font-size: 35px;
+    font-weight: 300;
+    color: #707070;
 }
