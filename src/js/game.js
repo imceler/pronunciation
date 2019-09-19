@@ -67,6 +67,7 @@ class Pronunciation {
         this.wordToSay = this.numberToWord(this.number, this.level)
         this.printWords()
         this.preValidation()
+        // this.readOut(this.wordToSay)
 
         speakBtn.addEventListener('click', function () {
             recognition.start()
@@ -87,6 +88,15 @@ class Pronunciation {
                 return words[level][n]
             }
     }
+    readOut(word) {
+    const speech = new SpeechSynthesisUtterance()
+    speech.text = word
+    speech.volume = 2
+    speech.rate = 1
+    speech.pitch = 1
+
+    window.speechSynthesis.speak(speech)
+    }
     increasePoints() {
         this.points++
         this.printPoints(this.points)
@@ -100,12 +110,10 @@ class Pronunciation {
     }
     onResult(say, self) {
         recognition.onresult = function(event) {
-            console.log(event)
+            // console.log(event)
             const current = event.resultIndex
             const wordSaid = event.results[current][0].transcript
             const wordSay = say
-
-            // content.textContent = transcript;
 
             const WORD_SAID = self.saidToLower(wordSaid)
             self.validation(WORD_SAID, wordSay)
@@ -138,3 +146,7 @@ function newGame () {
 }
 
 export default newGame
+
+// function readOut(message) {
+    
+// }
