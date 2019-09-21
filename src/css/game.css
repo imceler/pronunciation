@@ -1,96 +1,160 @@
+:root {
+  --margin: 4%;
+}
+
 * {
     margin: 0;
-    
+    color: var(--green-dark);
+    font-family: Century Gothic;
 }
 
 .section--play {
+    background-color: var(--red-light);
     margin: 0 auto;
-    width: 65vw;
-    height: 70vh;
+    width: 100vw;
+    height: 100vh;
     display: none;
     justify-content: center;
     align-items: center;
-}
-.section__div--points {
-    width: 150px;
-    height: 50px;
-    background: #FFF;
-    display: flex;
-    justify-content: space-around;
-    align-self: flex-start;
-    margin: 0 30px;
-}
-.section__div--points h3,
-div {
-    line-height: 50px;
-    font-weight: 100;
-    font-size: 25px;
-}
-.div--play-container {
-    padding: 7% 0;
-    width: 55%;
-    height: 100%;
-    background: #4B73CE;
-    display: inherit;
-    justify-content: space-between;
-    align-items: inherit;
     flex-direction: column;
 }
+.play--level {
+  margin-bottom: var(--margin);
+  width: 22%;
+  height: 7%;
+  background-color: #FFF;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.play--level h3 {
+  font-size: 30px;
+  margin: 15px;
+}
+
 .play--word {
-    width: 72%;
-    height: 38%;
-    color: green;
-    background: #C4C4C4;
+  margin-bottom: var(--margin);
+    width: 42%;
+    height: 15%;
+    background: var(--green-light);
+    border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
+.play--word h2 {
+    font-size: 50px;
+    font-weight: bold;
+}
+.icon-wrap {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+  cursor: pointer;
+  background: transparent;
+  position: absolute;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+}
+.icon {
+  background-image: url('../media/volumen-thin.svg');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  transition: .3s;
+}
+
+.listen-me {
+  background-image: url('../media/volumen-bold.svg');
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  transition: .3s;
+}
+
 .wrong {
     animation-name: wrong;
     animation-duration: 1s;
 }
 @keyframes wrong {
     0% {
-        transform: translateX(40px); 
-        color: rgb(255, 31, 31); 
+        transform: translateX(30px);
+        color: var(--red-dark);
     }
     20% {
-        transform: translateX(-30px); 
-        color: rgb(255, 31, 31);
+        transform: translateX(-30px);
+        color: var(--red-dark);
     }
     40% {
-        transform: translateX(20px); 
-        color: rgb(255, 31, 31); 
+        transform: translateX(20px);
+        color: var(--red-dark);
     }
     60% {
-        transform: translateX(-10px); 
-        color: rgb(255, 31, 31);
+        transform: translateX(-10px);
+        color: var(--red-dark);
     }
     80% {
-        transform: translateX(5px); 
-        color: rgb(255, 31, 31);
+        transform: translateX(5px);
+        color: var(--red-dark);
     }
     100% {
-        transform: translateX(0px); 
-        /* color: rgb(255, 31, 31);  */
+        transform: translateX(0px);
+        color: var(--red-dark);
     }
 }
-.play--word h2 {
-    font-size: 50px;
-    font-weight: 200;
-    color: inherit;
+.play--points {
+    margin-bottom: var(--margin);
+    width: 50%;
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }
+.play--points-word {
+    width: 40%;
+    height: 100%;
+    background: #FFF;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 0 0;
+}
+.play--points-word h3 {
+  font-weight: 100;
+  font-size: 40px;
+}
+.play--points-number {
+  width: 12%;
+  height: 100%;
+  background: #FFF;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.play--points-number h3 {
+  font-weight: 100;
+  font-size: 40px;
+}
+
 .play--speak {
-    width: 72%;
-    height: 38%;
-    background: #3A3940;
+    margin-bottom: var(--margin);
+    border-radius: 75px;
+    width: 32%;
+    height: 24%;
+    background: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 .play--speak h4 {
-    font-size: 40px;
+    font-size: 45px;
     font-weight: 100;
-    color: #DCDCDC;
 }

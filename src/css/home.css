@@ -1,0 +1,80 @@
+@import './game.css';
+
+:root {
+    --green-dark: #1FAB89;
+    --green-light: #C6F1D6;
+    --red-light: #FFBA92;
+    --red-dark: #FF8080;
+}
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    color: var(--green-dark);
+}
+main {
+    background: var(--green-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section--home {
+    margin: 0 auto;
+    width: 100vw;
+    height: 70vh;
+    display: grid;
+    grid-template: 1fr 1fr 1fr / 1fr 2fr 1fr;
+}
+.section--title-wrap {
+    grid-column: 2 / 2;
+    display: flex;
+    justify-self: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+.section__div--title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section__div--subtitle {
+    grid-column: 2 / 2;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section__div--subtitle h3 {
+  font-size: 40px;
+  font-weight: 100;
+}
+.section__div--title h1 {
+    font-size: 80px;
+    font-weight: bold;
+}
+.section--play-wrap {
+    grid-column: 2 / 2;
+    grid-row: 2 / 2;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 100%;
+}
+.section__div--play {
+    background: var(--red-light);
+    height: 52%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.section__div--play h3 {
+    font-size: 40px;
+    font-weight: 300;
+}
