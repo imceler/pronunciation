@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="238" height="238" viewBox="0 0 238 238">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #ffba92;
+      }
+
+      .cls-1 {
+        stroke: #707070;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="Rectángulo_29" data-name="Rectángulo 29" class="cls-1" width="238" height="238" transform="translate(1104 2722)"/>
+    </clipPath>
+  </defs>
+  <g id="Enmascarar_grupo_5" data-name="Enmascarar grupo 5" class="cls-2" transform="translate(-1104 -2722)">
+    <g id="volumen" transform="translate(1104 2740.099)">
+      <g id="Grupo_51" data-name="Grupo 51" transform="translate(0 0)">
+        <g id="Grupo_50" data-name="Grupo 50">
+          <path id="Trazado_19" data-name="Trazado 19" class="cls-3" d="M111.757,9.167,51.739,54.181H7.761A7.76,7.76,0,0,0,0,61.941v93.131a7.761,7.761,0,0,0,7.761,7.761H51.739l60.018,45.014a7.766,7.766,0,0,0,12.417-6.209V15.376A7.766,7.766,0,0,0,111.757,9.167ZM46.566,147.312H15.522V69.7H46.566Zm62.087,38.8L62.087,151.192V65.822L108.653,30.9Z" transform="translate(0 -7.605)"/>
+        </g>
+      </g>
+      <g id="Grupo_53" data-name="Grupo 53" transform="translate(190.707 16.312)">
+        <g id="Grupo_52" data-name="Grupo 52">
+          <path id="Trazado_20" data-name="Trazado 20" class="cls-3" d="M93.377,16.732A7.761,7.761,0,0,0,82.4,27.707a101.019,101.019,0,0,1,0,142.683,7.761,7.761,0,1,0,10.975,10.975,116.54,116.54,0,0,0,0-164.634Z" transform="translate(-80.129 -14.459)"/>
+        </g>
+      </g>
+      <g id="Grupo_55" data-name="Grupo 55" transform="translate(168.757 38.254)">
+        <g id="Grupo_54" data-name="Grupo 54">
+          <path id="Trazado_21" data-name="Trazado 21" class="cls-3" d="M84.157,25.953A7.761,7.761,0,0,0,73.178,36.925a69.967,69.967,0,0,1,0,98.8A7.761,7.761,0,0,0,84.157,146.7,85.507,85.507,0,0,0,84.157,25.953Z" transform="translate(-70.906 -23.678)"/>
+        </g>
+      </g>
+      <g id="Grupo_57" data-name="Grupo 57" transform="translate(146.801 60.218)">
+        <g id="Grupo_56" data-name="Grupo 56">
+          <path id="Trazado_22" data-name="Trazado 22" class="cls-3" d="M74.945,35.18A7.761,7.761,0,0,0,63.968,46.154a38.868,38.868,0,0,1-.015,54.888,7.761,7.761,0,1,0,10.978,10.973A54.408,54.408,0,0,0,74.945,35.18Z" transform="translate(-61.681 -32.906)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -13,13 +13,16 @@
     margin: 0;
     padding: 0;
     color: var(--green-dark);
+    overflow: hidden;
 }
 main {
     background: var(--green-light);
     min-height: 100vh;
     display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 .section--home {
     margin: 0 auto;
@@ -34,8 +37,10 @@ main {
     justify-self: flex-start;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 }
 .section__div--title {
+    height: 60%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -44,7 +49,6 @@ main {
 .section__div--subtitle {
     grid-column: 2 / 2;
     width: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;

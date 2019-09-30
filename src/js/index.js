@@ -1,12 +1,26 @@
 import '../css/home.css'
 import '../css/game.css'
 import newGame from './game.js'
+import tl from './tl'
 
 const home = document.getElementById('home')
-const playGame = document.getElementById('play-game')
 const game = document.getElementById('game')
+const playGame = document.getElementById('play-game')
+const title = document.getElementById('title')
+const titleWrap = document.getElementById('titleWrap')
+const subTitle = document.getElementById('subTitle')
 
-const tl = new TimelineMax();
+function callback(entries, observer) {
+    if (entries[0].isIntersecting) {
+        tl.fromTo(title, .6, {x: '-200px', opacity: '0'}, {x: '0px', opacity: '1'})
+        .fromTo(titleWrap, .6, {height: '10%'}, {height: '60%'})
+        .fromTo(subTitle, .6, {y: '-200px', opacity: '0'}, {y: '0px', opacity: '1'}, '-=0.2')
+        .fromTo(playGame, .6, {x: '-200px', opacity: '0'}, {x: '0px', opacity: '1'}, '-=0.2' )
+    } 
+}
+
+const observer = new IntersectionObserver(callback)
+observer.observe(home) 
 
 playGame.addEventListener('click', () => {
     tl.fromTo(home, 1, {display: 'flex', opacity: '1'}, {display: 'none', opacity: '0'})
@@ -14,6 +28,6 @@ playGame.addEventListener('click', () => {
     .fromTo(".play--level", 1, {x: -200, opacity: '0'}, {x: 0, opacity: '1'}, '-=0.4')
     .fromTo(".play--word", 1, {x: -200, opacity: '0'}, {x: 0,opacity: '1'}, '-=0.6')
     .fromTo(".play--points", 1, {x: -200, opacity: '0'}, {x: 0,opacity: '1'}, '-=0.6')
-    .fromTo(".play--speak", 1, {opacity: '0'}, {opacity: '1'})
+    .fromTo(".play--speak", .2, {opacity: '0'}, {opacity: '1'})
     newGame()
 })
