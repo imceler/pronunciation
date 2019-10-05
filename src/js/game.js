@@ -53,51 +53,60 @@ const level1 = [
     'Phone',
     'Mouse',
     'Keyboard',
-    'Glass',
+    'American',
     'Speaker',
     'Box'
 ]
 
 const level2 = [
     'Tv',
-    'Cup',
+    'Iron',
     'Car',
     'Light',
     'Shoes',
-    'Air',
+    'Lite',
     'Smart',
     'Amazing'
 ]
 
+const level3 = [
+    'skin',
+    'pillow',
+    'router',
+    'street'
+]
+
 words.push(level1)
 words.push(level2)
-
+words.push(level3)
 class Pronunciation {
     constructor(words, divs) {
         this.wordsDiv = divs.toPrintWords
         this.pointsDiv = divs.toPrintPoints
+        this.speak = divs.speak
         this.speakBtn = divs.speakBtn
         this.wordWrap = divs.wordWrap
         this.levelWrap = divs.levelWrap
         this.listenMe = divs.listenMe
         this.upAlert = divs.upAlert
         this.matchWord = divs.matchWord
-        this.points = 0
-        this.subLevel = 6
-        this.printPoints(this.points)
+        this.previous = []
         this.level = 0
+        this.subLevel = 6
+        this.points = 0
         this.startListening = this.startListening.bind(this)
-        this.start(this.level)
     }
-    start(level) {   
-        //Probar utilizando vars,lets y const
+    start(l) {   
+        let level = (l == true ? l : this.level)
+        
         this.numberWords = words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
+        this.prevNum(this.number)
         this.wordToSay = this.numberToWord(this.number, level)
+        
         this.printLevel(level)
-        console.log(this.wordToSay)
-        console.log(this.number)
         this.printWords()
+        this.printPoints(this.points)
         this.preValidation()
 
         this.listen()
@@ -113,8 +122,10 @@ class Pronunciation {
     nextPoint(level) {
         this.numberWords = words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
-        this.wordToSay = this.numberToWord(this.number, level)
-
+        let numberChecked = this.noRepeat(this.number, this.previous)
+        this.prevNum(numberChecked)
+        this.wordToSay = this.numberToWord(numberChecked, level)
+        
         this.printWords()
         this.preValidation()
 
@@ -127,11 +138,56 @@ class Pronunciation {
             speak.style.background = '#FFF'
         }
     }
+    nextLevel(level) {
+        this.numberWords = words[level].length
+        this.number = Math.floor(Math.random() * this.numberWords)
+        this.wordToSay = this.numberToWord(this.number, level)
+        // this.noRepeat(this.number, this.previous)
+        this.prevNum(this.number)
+        
+        this.printWords()
+        this.preValidation()
+        
+        this.speakBtn.addEventListener('click', () => this.startListening())
+        
+        recognition.onspeechend = function() {
+            recognition.stop()
+            speakBtn.textContent = 'Press to speak'
+            speakBtn.style.color = '#1FAB89'
+            speak.style.background = '#FFF'
+        }
+    }
+    prevNum(n) {
+        this.previous.push(n)
+    }
+    noRepeat(number, prev) { 
+        console.log(`entro este ${number}`)
+        function is (a, n) {
+            let found = a.find(element => element == n)
+            return found >= 1 ? true : false 
+        }
+        if (prev.length >= 1) {
+                        console.log(prev)
+            let isThere = is(prev, number)
+                        console.log(isThere)
+            if (isThere) {
+                this.number = Math.floor(Math.random() * this.numberWords)
+                console.log(`Se cambio por este ${this.number}`)
+                let isThere = is(prev, this.number) 
+                if (isThere) {
+                    this.number = Math.floor(Math.random() * this.numberWords)
+                    console.log(`Se re-cambio por este ${this.number}`)
+                }
+            }
+        }
+        console.log(`Y salio este ${this.number}`)
+        return this.number
+    }
     startListening() {
-            recognition.start() 
-            this.speakBtn.textContent = 'Listening you'
-            this.speakBtn.style.color = '#FF8080'
-            divs.speak.style.background = '#C6F1D6'
+        try {recognition.start()}catch{} 
+        this.speakBtn.textContent = 'Listening you'
+        this.speakBtn.style.color = '#FF8080'
+        divs.speak.style.background = '#C6F1D6'
 
     }
     listen() {
@@ -160,14 +216,14 @@ class Pronunciation {
             }
     }
     readOut(word) {
-    const speech = new SpeechSynthesisUtterance()
-    speech.text = word
-    speech.lang = 'en-US'
-    speech.volume = 1
-    speech.rate = .5
-    speech.pitch = .5
+        const speech = new SpeechSynthesisUtterance()
+        speech.text = word
+        speech.lang = 'en-US'
+        speech.volume = 1
+        speech.rate = .5
+        speech.pitch = .5
 
-    window.speechSynthesis.speak(speech)
+        window.speechSynthesis.speak(speech)
     }
     increasePoints() {
         this.points++
@@ -181,6 +237,10 @@ class Pronunciation {
     resetPoints() {
         this.points = 0
         this.printPoints(this.points)
+    }
+    resetPrevious() {
+        this.previous = []
+        console.log(this.previous)
     }
     increaseLevel() {
         this.level++
@@ -197,16 +257,16 @@ class Pronunciation {
         divs.levelUp.addEventListener('click', () => {
             this.subLevel++
 
-            this.resetPoints()
-
-            this.printLevel(this.level)
-            console.log(this.level)
-
             setTimeout(() => divs.upAlert.style.display = 'none', 900)
             divs.upAlert.classList.add('next')
             setTimeout(() => divs.upAlert.classList.remove('next'), 1300)
+            
+            this.resetPrevious()
+            this.resetPoints()
 
-            this.start(this.level)
+            this.printLevel(this.level)
+            
+            this.nextLevel(this.level)
         })
     }
     preValidation() {
@@ -247,6 +307,7 @@ class Pronunciation {
 
 function newGame () {
     const startGame = new Pronunciation(words, divs)
+    startGame.start()
 }
 
 export default newGame
