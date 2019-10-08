@@ -1,3 +1,5 @@
+import tl from './tl'
+
 const home = document.getElementById('home')
 const game = document.getElementById('game')
 const toPrintPoints = document.getElementById('points')
@@ -40,8 +42,6 @@ const speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
-
-const tl = new TimelineMax();
 
 var words = new Array(0)
 
@@ -101,7 +101,7 @@ class Pronunciation {
         
         this.numberWords = words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
-        this.prevNum(this.number)
+        this.previousNumber(this.number)
         this.wordToSay = this.numberToWord(this.number, level)
         
         this.printLevel(level)
@@ -123,7 +123,7 @@ class Pronunciation {
         this.numberWords = words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
         let numberChecked = this.noRepeat(this.number, this.previous)
-        this.prevNum(numberChecked)
+        this.previousNumber(numberChecked)
         this.wordToSay = this.numberToWord(numberChecked, level)
         
         this.printWords()
@@ -142,8 +142,7 @@ class Pronunciation {
         this.numberWords = words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
         this.wordToSay = this.numberToWord(this.number, level)
-        // this.noRepeat(this.number, this.previous)
-        this.prevNum(this.number)
+        this.previousNumber(this.number)
         
         this.printWords()
         this.preValidation()
@@ -157,38 +156,32 @@ class Pronunciation {
             speak.style.background = '#FFF'
         }
     }
-    prevNum(n) {
+    previousNumber(n) {
         this.previous.push(n)
     }
-    noRepeat(number, prev) { 
-        console.log(`entro este ${number}`)
+    noRepeat(number, prev) {
         function is (a, n) {
             let found = a.find(element => element == n)
-            return found >= 1 ? true : false 
+            return found >= 0 ? true : false 
         }
         if (prev.length >= 1) {
-                        console.log(prev)
             let isThere = is(prev, number)
-                        console.log(isThere)
-            if (isThere) {
-                this.number = Math.floor(Math.random() * this.numberWords)
-                console.log(`Se cambio por este ${this.number}`)
-                let isThere = is(prev, this.number) 
-                if (isThere) {
+            if (isThere) {             
+                do {
                     this.number = Math.floor(Math.random() * this.numberWords)
-                    console.log(`Se re-cambio por este ${this.number}`)
+                    var isIt = is(prev, this.number)
+                } while(isIt == true)
+                return this.number
+            } else {
+                    return this.number
                 }
             }
         }
-        console.log(`Y salio este ${this.number}`)
-        return this.number
-    }
     startListening() {
         try {recognition.start()}catch{} 
         this.speakBtn.textContent = 'Listening you'
         this.speakBtn.style.color = '#FF8080'
         divs.speak.style.background = '#C6F1D6'
-
     }
     listen() {
        this.listenMe.addEventListener('click', () => {
@@ -197,8 +190,8 @@ class Pronunciation {
      })
     }
     listenIcon() {
-      tl.fromTo('.icon-wrap', 1, {background: 'transparent'}, {background: '#FF8080'})
-      tl.fromTo('.icon-wrap', 1, {background: '#FF8080'}, {background: 'transparent'})
+        tl.fromTo('.icon-wrap', 1, {background: 'transparent'}, {background: '#FF8080'})
+        tl.fromTo('.icon-wrap', 1, {background: '#FF8080'}, {background: 'transparent'})
     }
     printPoints(points) {
         this.pointsDiv.textContent = points
@@ -240,7 +233,6 @@ class Pronunciation {
     }
     resetPrevious() {
         this.previous = []
-        console.log(this.previous)
     }
     increaseLevel() {
         this.level++
