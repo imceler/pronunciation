@@ -12,10 +12,10 @@ const subTitle = document.getElementById('subTitle')
 
 function callback(entries, observer) {
     if (entries[0].isIntersecting) {
-        tl.fromTo(title, .6, {x: '-200px', opacity: '0'}, {x: '0px', opacity: '1'})
-        .fromTo(titleWrap, .6, {height: '10%'}, {height: '60%'})
-        .fromTo(subTitle, .6, {y: '-200px', opacity: '0'}, {y: '0px', opacity: '1'}, '-=0.2')
-        .fromTo(playGame, .6, {x: '-200px', opacity: '0'}, {x: '0px', opacity: '1'}, '-=0.2' )
+        tl.fromTo(title, .6, {x: '-200px', opacity: '0', display: 'none'}, {x: '0px', opacity: '1', display: 'block'})
+        .fromTo(titleWrap, .6, {height: '10%', display: 'none'}, {height: '60%', display: 'flex'})
+        .fromTo(subTitle, .6, {y: '-200px', opacity: '0', display: 'none'}, {y: '0px', opacity: '1', display: 'flex'}, '-=0.2')
+        .fromTo(playGame, .6, {x: '-200px', opacity: '0', display: 'none'}, {x: '0px', opacity: '1', display: 'flex'}, '-=0.2' )
     } 
 }
 

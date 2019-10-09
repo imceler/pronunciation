@@ -46,34 +46,38 @@ const speechRecognitionList = new SpeechGrammarList();
 var words = new Array(0)
 
 const level1 = [
-    'Hello',
-    'Window',
-    'Guitar',
-    'Thunder',
-    'Phone',
-    'Mouse',
-    'Keyboard',
-    'American',
-    'Speaker',
-    'Box'
+    'Blue',
+    'Red',
+    'Yellow',
+    'Gray',
+    'Black',
+    'White',
+    'Purple',
+    'Pink',
+    'Brown'
 ]
 
 const level2 = [
-    'Tv',
-    'Iron',
-    'Car',
-    'Light',
-    'Shoes',
-    'Lite',
-    'Smart',
-    'Amazing'
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10'
 ]
 
 const level3 = [
-    'skin',
-    'pillow',
-    'router',
-    'street'
+    'I',
+    'You',
+    'He',
+    'She',
+    'It',
+    'They',
+    'We'
 ]
 
 words.push(level1)

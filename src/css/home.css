@@ -19,7 +19,6 @@ main {
     background: var(--green-light);
     min-height: 100vh;
     display: flex;
-    /* display: none; */
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -42,14 +41,14 @@ main {
 .section__div--title {
     height: 60%;
     width: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
 .section__div--subtitle {
     grid-column: 2 / 2;
     width: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -58,6 +57,7 @@ main {
   font-weight: 100;
 }
 .section__div--title h1 {
+    display: none;
     font-size: 80px;
     font-weight: bold;
 }
@@ -73,7 +73,7 @@ main {
     background: var(--red-light);
     height: 52%;
     border-radius: 50px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     cursor: pointer;
