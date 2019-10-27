@@ -1,36 +1,39 @@
-import tl from './tl'
+import React from 'react'
+import { connect } from 'react-redux'
+import { printWord } from '../actions'
+import { listenButton } from '../containers/Game'
 
-const home = document.getElementById('home')
-const game = document.getElementById('game')
-const toPrintPoints = document.getElementById('points')
-const toPrintWords = document.getElementById('words')
-const speakBtn = document.getElementById('speak-button')
-const speak = document.getElementById('speak')
-const wordWrap = document.querySelector(".play--word h2")
-const levelWrap = document.getElementById('level')
-const listenMe = document.getElementById('listenMe')
-const actualLevel = document.getElementById('actualLevel')
-const levelUp = document.getElementById('levelUp')
-const upAlert = document.getElementById('upAlert')
-const returnArrow = document.getElementById('return')
-const matchWord = document.getElementById('match')
+// const home = document.getElementById('home')
+// const game = document.getElementById('game')
+// const toPrintPoints = document.getElementById('points')
+// const toPrintWords = document.getElementById('words')
+// const speakBtn = document.getElementById('speak-button')
+// const speak = document.getElementById('speak')
+// const wordWrap = document.querySelector(".play--word h2")
+// const levelWrap = document.getElementById('level')
+// const listenMe = document.getElementById('listenMe')
+// const actualLevel = document.getElementById('actualLevel')
+// const levelUp = document.getElementById('levelUp')
+// const upAlert = document.getElementById('upAlert')
+// const returnArrow = document.getElementById('return')
+// const matchWord = document.getElementById('match')
 
-const divs = {
-    toPrintPoints,
-    toPrintWords,
-    speakBtn,
-    speak,
-    wordWrap,
-    levelWrap,
-    listenMe,
-    actualLevel,
-    levelUp,
-    upAlert,
-    returnArrow,
-    home,
-    game,
-    matchWord
-}
+// const divs = {
+//     toPrintPoints,
+//     toPrintWords,
+//     speakBtn,
+//     speak,
+//     wordWrap,
+//     levelWrap,
+//     listenMe,
+//     actualLevel,
+//     levelUp,
+//     upAlert,
+//     returnArrow,
+//     home,
+//     game,
+//     matchWord
+// }
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
@@ -43,78 +46,80 @@ const speechRecognitionList = new SpeechGrammarList();
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
 
-var words = new Array(0)
+// var words = new Array(0)
 
-const level1 = [
-    'Blue',
-    'Red',
-    'Yellow',
-    'Gray',
-    'Black',
-    'White',
-    'Purple',
-    'Pink',
-    'Brown'
-]
+// const level1 = [
+//     'Blue',
+//     'Red',
+//     'Yellow',
+//     'Gray',
+//     'Black',
+//     'White',
+//     'Purple',
+//     'Pink',
+//     'Brown'
+// ]
 
-const level2 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
-]
+// const level2 = [
+//     '1',
+//     '2',
+//     '3',
+//     '4',
+//     '5',
+//     '6',
+//     '7',
+//     '8',
+//     '9',
+//     '10'
+// ]
 
-const level3 = [
-    'I',
-    'You',
-    'He',
-    'She',
-    'It',
-    'They',
-    'We'
-]
+// const level3 = [
+//     'I',
+//     'You',
+//     'He',
+//     'She',
+//     'It',
+//     'They',
+//     'We'
+// ]
 
-words.push(level1)
-words.push(level2)
-words.push(level3)
+// words.push(level1)
+// words.push(level2)
+// words.push(level3)
+
 class Pronunciation {
-    constructor(words, divs) {
-        this.wordsDiv = divs.toPrintWords
-        this.pointsDiv = divs.toPrintPoints
-        this.speak = divs.speak
-        this.speakBtn = divs.speakBtn
-        this.wordWrap = divs.wordWrap
-        this.levelWrap = divs.levelWrap
-        this.listenMe = divs.listenMe
-        this.upAlert = divs.upAlert
-        this.matchWord = divs.matchWord
+    constructor(words, actions) {
+        // this.wordsDiv = divs.toPrintWords
+        // this.pointsDiv = divs.toPrintPoints
+        // this.speak = divs.speak
+        // this.speakBtn = divs.speakBtn
+        // this.wordWrap = divs.wordWrap
+        // this.levelWrap = divs.levelWrap
+        // this.listenMe = divs.listenMe
+        // this.upAlert = divs.upAlert
+        // this.matchWord = divs.matchWord
+        this.words = words
         this.previous = []
         this.level = 0
         this.subLevel = 6
         this.points = 0
         this.startListening = this.startListening.bind(this)
+        this.readOut = this.readOut.bind(this)
     }
     start(l) {   
         let level = (l == true ? l : this.level)
-        
-        this.numberWords = words[level].length
+
+        this.numberWords = this.words[level].length
         this.number = Math.floor(Math.random() * this.numberWords)
         this.previousNumber(this.number)
         this.wordToSay = this.numberToWord(this.number, level)
-        
-        this.printLevel(level)
-        this.printWords()
-        this.printPoints(this.points)
+
+        // this.printLevel(level)
+        // this.printPoints(this.points)
         this.preValidation()
 
-        this.listen()
-        this.speakBtn.addEventListener('click', () => this.startListening())
+        // this.listen()
+        // this.speakBtn.addEventListener('click', () => this.startListening())
 
         recognition.onspeechend = function() {
             recognition.stop()
@@ -187,29 +192,28 @@ class Pronunciation {
         this.speakBtn.style.color = '#FF8080'
         divs.speak.style.background = '#C6F1D6'
     }
-    listen() {
-       this.listenMe.addEventListener('click', () => {
-       this.listenIcon()
-       this.readOut(this.wordToSay)
-     })
-    }
-    listenIcon() {
-        tl.fromTo('.icon-wrap', 1, {background: 'transparent'}, {background: '#FF8080'})
-        tl.fromTo('.icon-wrap', 1, {background: '#FF8080'}, {background: 'transparent'})
-    }
+    // listen() {
+    // //    this.listenMe.addEventListener('click', () => {
+    // //    this.listenIcon()
+    //    this.readOut(this.wordToSay)
+    // //  })
+    // }
+
     printPoints(points) {
         this.pointsDiv.textContent = points
     }
     printLevel(level) {
         this.levelWrap.textContent = level + 1
     }
-    printWords() {
-        this.wordsDiv.textContent = this.wordToSay
+    printWords(word) {
+        console.log(word)
+        printWord(word)
+        // debugger
     }
     numberToWord(n,level) {
         switch(n) {
             case n:
-                return words[level][n]
+                return this.words[level][n]
             }
     }
     readOut(word) {
@@ -301,9 +305,21 @@ class Pronunciation {
     }
 }
 
-function newGame () {
-    const startGame = new Pronunciation(words, divs)
-    startGame.start()
-}
+// export function newGame () {
+//     const startGame = new Pronunciation(words, actions)
+//     startGame.start()
+// }
 
-export default newGame
+// const mapStateToProps = state => {
+//     return {
+//         word: state.word
+//     }
+// }
+
+// const mapDispatchToProps = {
+//     printWord,
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Pronunciation)
+// export default connect(null, null)(Pronunciation)
+export default Pronunciation

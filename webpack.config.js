@@ -7,23 +7,27 @@ const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-    entry: path.resolve(__dirname,'src/js/index.js'),
+    entry: path.resolve(__dirname,'src/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].[hash].js',
-        // publicPath: 'http://localhost:1234/',
+        publicPath: '/',
         // publicPath: 'pronunciation',
         chunkFilename: 'js/[id].[chunkhash].js'
     },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
       },
+      resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
       rules: [
             {
-                test: /\.js$/, 
-                use: 'babel-loader', 
-                exclude: /node_modules/,
+                test: /\.(js|jsx)$/,
+                use: {
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.css$/,
@@ -55,8 +59,8 @@ module.exports = {
             filename: './index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[hash].css',
-            chunkFilename: 'css/[id].[hash].css'
+            filename: 'styles/[name].[hash].css',
+            chunkFilename: 'styles/[id].[hash].css'
           }),
           new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'dist/js/*.js')

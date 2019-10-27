@@ -6,7 +6,6 @@
     --red-light: #FFBA92;
     --red-dark: #FF8080;
 }
-
 *,
 ::after,
 ::before {
@@ -14,6 +13,7 @@
     padding: 0;
     color: var(--green-dark);
     overflow: hidden;
+    text-decoration: none;
 }
 main {
     background: var(--green-light);
@@ -41,7 +41,7 @@ main {
 .section__div--title {
     height: 60%;
     width: 100%;
-    display: none;
+    display: block;
     justify-content: center;
     align-items: center;
 }
