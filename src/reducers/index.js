@@ -5,6 +5,11 @@ const reducer = (state, action) => {
                 ...state,
                 word: action.payload,
             } 
+        case 'VALIDATION':
+            return {
+                ...state,
+                validation: action.payload,
+            } 
         default: 
             return state;
      }

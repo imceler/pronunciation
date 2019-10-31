@@ -1,325 +1,249 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { printWord } from '../actions'
-import { listenButton } from '../containers/Game'
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
+// import { listenButton } from '../containers/Game';
 
-// const home = document.getElementById('home')
-// const game = document.getElementById('game')
-// const toPrintPoints = document.getElementById('points')
-// const toPrintWords = document.getElementById('words')
-// const speakBtn = document.getElementById('speak-button')
-// const speak = document.getElementById('speak')
-// const wordWrap = document.querySelector(".play--word h2")
-// const levelWrap = document.getElementById('level')
-// const listenMe = document.getElementById('listenMe')
-// const actualLevel = document.getElementById('actualLevel')
-// const levelUp = document.getElementById('levelUp')
-// const upAlert = document.getElementById('upAlert')
-// const returnArrow = document.getElementById('return')
-// const matchWord = document.getElementById('match')
 
-// const divs = {
-//     toPrintPoints,
-//     toPrintWords,
-//     speakBtn,
-//     speak,
-//     wordWrap,
-//     levelWrap,
-//     listenMe,
-//     actualLevel,
-//     levelUp,
-//     upAlert,
-//     returnArrow,
-//     home,
-//     game,
-//     matchWord
-// }
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-const grammar = '#JSGF V1.0'
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+const grammar = '#JSGF V1.0';
 
-const recognition = new SpeechRecognition();
-const speechRecognitionList = new SpeechGrammarList();
-    recognition.lang = 'en-US';
-    speechRecognitionList.addFromString(grammar, 1);
-    recognition.grammars = speechRecognitionList;
-    recognition.interimResults = false;
+export const recognition = new SpeechRecognition();
+export const speechRecognitionList = new SpeechGrammarList();
+recognition.lang = 'en-US';
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+recognition.interimResults = false;
 
-// var words = new Array(0)
-
-// const level1 = [
-//     'Blue',
-//     'Red',
-//     'Yellow',
-//     'Gray',
-//     'Black',
-//     'White',
-//     'Purple',
-//     'Pink',
-//     'Brown'
-// ]
-
-// const level2 = [
-//     '1',
-//     '2',
-//     '3',
-//     '4',
-//     '5',
-//     '6',
-//     '7',
-//     '8',
-//     '9',
-//     '10'
-// ]
-
-// const level3 = [
-//     'I',
-//     'You',
-//     'He',
-//     'She',
-//     'It',
-//     'They',
-//     'We'
-// ]
-
-// words.push(level1)
-// words.push(level2)
-// words.push(level3)
 
 class Pronunciation {
-    constructor(words, actions) {
-        // this.wordsDiv = divs.toPrintWords
-        // this.pointsDiv = divs.toPrintPoints
-        // this.speak = divs.speak
-        // this.speakBtn = divs.speakBtn
-        // this.wordWrap = divs.wordWrap
-        // this.levelWrap = divs.levelWrap
-        // this.listenMe = divs.listenMe
-        // this.upAlert = divs.upAlert
-        // this.matchWord = divs.matchWord
-        this.words = words
-        this.previous = []
-        this.level = 0
-        this.subLevel = 6
-        this.points = 0
-        this.startListening = this.startListening.bind(this)
-        this.readOut = this.readOut.bind(this)
-    }
-    start(l) {   
-        let level = (l == true ? l : this.level)
+  constructor(words, e) {
+    this.tryAgain = false
+    this.words = words;
+    this.previous = [];
+    this.level = 0;
+    this.subLevel = 6;
+    this.points = 0;
+    this.startSpeak = this.startSpeak.bind(this);
+    this.readOut = this.readOut.bind(this);
+  }
 
-        this.numberWords = this.words[level].length
-        this.number = Math.floor(Math.random() * this.numberWords)
-        this.previousNumber(this.number)
-        this.wordToSay = this.numberToWord(this.number, level)
+  start(l) {
+    const level = (l == true ? l : this.level);
+    // console.log(e.Match)
+    this.numberWords = this.words[level].length;
+    this.number = Math.floor(Math.random() * this.numberWords);
+    this.previousNumber(this.number);
+    this.wordToSay = this.numberToWord(this.number, level);
 
-        // this.printLevel(level)
-        // this.printPoints(this.points)
-        this.preValidation()
+    // this.printLevel(level)
+    // this.printPoints(this.points)
+    this.preValidation();
 
-        // this.listen()
-        // this.speakBtn.addEventListener('click', () => this.startListening())
+    // this.listen()
+    // this.speakBtn.addEventListener('click', () => this.startSpeak())
 
-        recognition.onspeechend = function() {
-            recognition.stop()
-            speakBtn.textContent = 'Press to speak'
-            speakBtn.style.color = '#1FAB89'
-            speak.style.background = '#FFF'
-        }
-    }
-    nextPoint(level) {
-        this.numberWords = words[level].length
-        this.number = Math.floor(Math.random() * this.numberWords)
-        let numberChecked = this.noRepeat(this.number, this.previous)
-        this.previousNumber(numberChecked)
-        this.wordToSay = this.numberToWord(numberChecked, level)
-        
-        this.printWords()
-        this.preValidation()
+    this.speakEnd();
+  }
 
-        this.speakBtn.addEventListener('click', () => this.startListening())
+  // eslint-disable-next-line class-methods-use-this
+  speakEnd(speakBtn, speakWrap) {
+    recognition.onspeechend = function () {
+      recognition.stop();
+      speakBtn.textContent = 'Press to speak';
+      speakBtn.style.color = '#1FAB89';
+      speakWrap.style.background = '#FFF';
+    };
+  }
 
-        recognition.onspeechend = function() {
-            recognition.stop()
-            speakBtn.textContent = 'Press to speak'
-            speakBtn.style.color = '#1FAB89'
-            speak.style.background = '#FFF'
-        }
-    }
-    nextLevel(level) {
-        this.numberWords = words[level].length
-        this.number = Math.floor(Math.random() * this.numberWords)
-        this.wordToSay = this.numberToWord(this.number, level)
-        this.previousNumber(this.number)
-        
-        this.printWords()
-        this.preValidation()
-        
-        this.speakBtn.addEventListener('click', () => this.startListening())
-        
-        recognition.onspeechend = function() {
-            recognition.stop()
-            speakBtn.textContent = 'Press to speak'
-            speakBtn.style.color = '#1FAB89'
-            speak.style.background = '#FFF'
-        }
-    }
-    previousNumber(n) {
-        this.previous.push(n)
-    }
-    noRepeat(number, prev) {
-        function is (a, n) {
-            let found = a.find(element => element == n)
-            return found >= 0 ? true : false 
-        }
-        if (prev.length >= 1) {
-            let isThere = is(prev, number)
-            if (isThere) {             
-                do {
-                    this.number = Math.floor(Math.random() * this.numberWords)
-                    var isIt = is(prev, this.number)
-                } while(isIt == true)
-                return this.number
-            } else {
-                    return this.number
-                }
-            }
-        }
-    startListening() {
-        try {recognition.start()}catch{} 
-        this.speakBtn.textContent = 'Listening you'
-        this.speakBtn.style.color = '#FF8080'
-        divs.speak.style.background = '#C6F1D6'
-    }
-    // listen() {
-    // //    this.listenMe.addEventListener('click', () => {
-    // //    this.listenIcon()
-    //    this.readOut(this.wordToSay)
-    // //  })
-    // }
+  nextPoint(level) {
+    this.numberWords = words[level].length;
+    this.number = Math.floor(Math.random() * this.numberWords);
+    const numberChecked = this.noRepeat(this.number, this.previous);
+    this.previousNumber(numberChecked);
+    this.wordToSay = this.numberToWord(numberChecked, level);
 
-    printPoints(points) {
-        this.pointsDiv.textContent = points
-    }
-    printLevel(level) {
-        this.levelWrap.textContent = level + 1
-    }
-    printWords(word) {
-        console.log(word)
-        printWord(word)
-        // debugger
-    }
-    numberToWord(n,level) {
-        switch(n) {
-            case n:
-                return this.words[level][n]
-            }
-    }
-    readOut(word) {
-        const speech = new SpeechSynthesisUtterance()
-        speech.text = word
-        speech.lang = 'en-US'
-        speech.volume = 1
-        speech.rate = .5
-        speech.pitch = .5
+    this.printWords();
+    this.preValidation();
 
-        window.speechSynthesis.speak(speech)
-    }
-    increasePoints() {
-        this.points++
-        this.printPoints(this.points)
-    }
-    match() {
-        this.matchWord.style.display = 'block'
-        setTimeout(() => divs.matchWord.style.display = 'none', 1200)
-        this.increasePoints()
-    }
-    resetPoints() {
-        this.points = 0
-        this.printPoints(this.points)
-    }
-    resetPrevious() {
-        this.previous = []
-    }
-    increaseLevel() {
-        this.level++
-        this.levelUp()
-    }
-    levelUp() {
-        tl.fromTo(this.upAlert, 1, {display: 'none', opacity: '0', x: '-120px'}, {display: 'flex', opacity: '1',x: '0px'})
-        
-        divs.returnArrow.addEventListener('click', () => {
-            tl.fromTo(divs.home, 1.5, {display: 'none', opacity: '0'}, {display: 'flex', opacity: '1'})
-            .fromTo(divs.game, 1.4, {display: 'flex',opacity: '1'}, {display: 'none',opacity: '.4'}, '-=0.6')
-        })
+    this.speakBtn.addEventListener('click', () => this.startSpeak());
 
-        divs.levelUp.addEventListener('click', () => {
-            this.subLevel++
+    recognition.onspeechend = function () {
+      recognition.stop();
+      speakBtn.textContent = 'Press to speak';
+      speakBtn.style.color = '#1FAB89';
+      speak.style.background = '#FFF';
+    };
+  }
 
-            setTimeout(() => divs.upAlert.style.display = 'none', 900)
-            divs.upAlert.classList.add('next')
-            setTimeout(() => divs.upAlert.classList.remove('next'), 1300)
-            
-            this.resetPrevious()
-            this.resetPoints()
+  nextLevel(level) {
+    this.numberWords = words[level].length;
+    this.number = Math.floor(Math.random() * this.numberWords);
+    this.wordToSay = this.numberToWord(this.number, level);
+    this.previousNumber(this.number);
 
-            this.printLevel(this.level)
-            
-            this.nextLevel(this.level)
-        })
-    }
-    preValidation() {
-        this.wordToSay = this.wordToSay.toLowerCase()
-        this.onResult(this.wordToSay, this)
-    }
-    saidToLower(said) {
-        return said.toLowerCase()
-    }
-    onResult(say, self) {
-        recognition.onresult = function(event) {
-            const current = event.resultIndex
-            const wordSaid = event.results[current][0].transcript
-            const wordSay = say
+    this.printWords();
+    this.preValidation();
 
-            const WORD_SAID = self.saidToLower(wordSaid)
-            self.validation(WORD_SAID, wordSay)
-        }
+    this.speakBtn.addEventListener('click', () => this.startSpeak());
+
+    recognition.onspeechend = function () {
+      recognition.stop();
+      speakBtn.textContent = 'Press to speak';
+      speakBtn.style.color = '#1FAB89';
+      speak.style.background = '#FFF';
+    };
+  }
+
+  previousNumber(n) {
+    this.previous.push(n);
+  }
+
+  noRepeat(number, prev) {
+    function is(a, n) {
+      const found = a.find((element) => element == n);
+      return found >= 0;
     }
-    validation(Said, Say) {
-        if (Said == Say) {
-            this.match()
-            setTimeout(() => { if (this.points < this.subLevel) {
-                this.nextPoint(this.level)
-            } else {
-                this.increaseLevel()
-            }
-        }, 1200)
+    if (prev.length >= 1) {
+      const isThere = is(prev, number);
+      if (isThere) {             
+        do {
+          this.number = Math.floor(Math.random() * this.numberWords);
+          const isIt = is(prev, this.number);
+        } while (isIt === true);
+        return this.number;
+      } 
+
+      return this.number;         
+    }
+  }
+
+  startSpeak(speakBtn, speakWrap) {
+    try { recognition.start(); }catch {}
+    speakBtn.textContent = 'Listening you';
+    speakBtn.style.color = '#FF8080';
+    speakWrap.style.background = '#C6F1D6';
+  }
+
+  printPoints(points) {
+    this.pointsDiv.textContent = points;
+  }
+
+  printLevel(level) {
+    this.levelWrap.textContent = level + 1;
+  }
+
+  numberToWord(n, level) {
+    switch (n) {
+      case n:
+        return this.words[level][n];
+    }
+  }
+
+  readOut(word) {
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = word;
+    speech.lang = 'en-US';
+    speech.volume = 1;
+    speech.rate = 0.5;
+    speech.pitch = 0.5;
+
+    window.speechSynthesis.speak(speech);
+  }
+
+  increasePoints() {
+    this.points++;
+    this.printPoints(this.points);
+  }
+
+  match() {
+    e.style.display = 'block';
+    setTimeout(() => e.style.display = 'none', 1200);
+    this.increasePoints();
+  }
+
+  resetPoints() {
+    this.points = 0;
+    this.printPoints(this.points);
+  }
+
+  resetPrevious() {
+    this.previous = [];
+  }
+
+  increaseLevel() {
+    this.level++;
+    this.levelUp();
+  }
+
+  levelUp() {
+    tl.fromTo(this.upAlert, 1, { display: 'none', opacity: '0', x: '-120px' }, { display: 'flex', opacity: '1', x: '0px' });
+
+    divs.returnArrow.addEventListener('click', () => {
+      tl.fromTo(divs.home, 1.5, { display: 'none', opacity: '0' }, { display: 'flex', opacity: '1' })
+        .fromTo(divs.game, 1.4, { display: 'flex', opacity: '1' }, { display: 'none', opacity: '.4' }, '-=0.6');
+    });
+
+    divs.levelUp.addEventListener('click', () => {
+      this.subLevel++;
+
+      setTimeout(() => divs.upAlert.style.display = 'none', 900);
+      divs.upAlert.classList.add('next');
+      setTimeout(() => divs.upAlert.classList.remove('next'), 1300);
+
+      this.resetPrevious();
+      this.resetPoints();
+
+      this.printLevel(this.level);
+
+      this.nextLevel(this.level);
+    });
+  }
+
+  preValidation() {
+    this.wordToSay = this.wordToSay.toLowerCase();
+    this.onResult(this.wordToSay, this);
+  }
+
+  saidToLower(said) {
+    return said.toLowerCase();
+  }
+
+  onResult(say, self) {
+    recognition.onresult = function (event) {
+      const current = event.resultIndex;
+      const wordSaid = event.results[current][0].transcript;
+      const wordSay = say;
+      const WORD_SAID = self.saidToLower(wordSaid);
+      const luis = () => self.validation(WORD_SAID, wordSay);
+      validation(luis())
+    };
+  }
+
+  validation(Said, Say) {
+    // eslint-disable-next-line eqeqeq
+    if (Said == Say) {
+      this.match();
+      setTimeout(() => {
+        if (this.points < this.subLevel) {
+          this.nextPoint(this.level);
         } else {
-            this.tryAgain()
+          this.increaseLevel();
         }
+      }, 1200);
+      return true
+    } else {
+        console.log('hey, try again')
+      this.tryAgain = true
+      return false
     }
-    tryAgain() {
-            this.wordWrap.classList.add('wrong')
-            setTimeout(() => this.wordWrap.classList.remove('wrong'), 1500)
-    }
+  }
+
+//   tryAgain(wrap) {
+//       wrap.className.add('wrong');
+//       setTimeout(() => wrap.className.remove('wrong'), 1500);
+//   }
 }
 
-// export function newGame () {
-//     const startGame = new Pronunciation(words, actions)
-//     startGame.start()
-// }
-
-// const mapStateToProps = state => {
-//     return {
-//         word: state.word
-//     }
-// }
-
-// const mapDispatchToProps = {
-//     printWord,
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Pronunciation)
-// export default connect(null, null)(Pronunciation)
 export default Pronunciation

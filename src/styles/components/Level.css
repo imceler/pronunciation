@@ -1,0 +1,26 @@
+.section--play {
+    background-color: var(--red-light);
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+.play--level {
+  margin-bottom: var(--margin);
+  width: 22%;
+  height: 7%;
+  opacity: 0;
+  background-color: #FFF;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.play--level h3 {
+  font-size: 30px;
+  margin: 15px;
+}

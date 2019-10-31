@@ -38,7 +38,8 @@ const level3 = [
     'We'
 ]
 
-const initialState = {    
+const initialState = {  
+    "validation": null,  
     "word": {},
     "points": {},
     "level": [

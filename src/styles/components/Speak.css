@@ -1,0 +1,18 @@
+.play--speak {
+    margin-bottom: var(--margin);
+    border-radius: 75px;
+    width: 32%;
+    height: 24%;
+    background: #FFF;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .5s;
+}
+.play--speak h4 {
+    font-size: 45px;
+    font-weight: 100;
+    transition: .5s;
+}

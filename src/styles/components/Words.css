@@ -1,0 +1,96 @@
+.play--word {
+    margin-bottom: var(--margin);
+      width: 42%;
+      height: 15%;
+      background: var(--green-light);
+      border-radius: 50px;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+  .play--word-match {
+    background-image: url('../../media/match.svg');
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 60px;
+    display: none;
+    animation: matched 1s ease-in-out;
+  }
+  @keyframes matched {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: .3;
+    }
+    40% {
+      opacity: .6;
+    }
+    60% {
+      opacity: .9;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .play--word h2 {
+      font-size: 50px;
+      font-weight: bold;
+  }
+  .icon-wrap {
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    cursor: pointer;
+    background-color: transparent;
+    position: absolute;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+  }
+  .icon {
+    background-image: url('../../media/volumen.svg');
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+    transition: .3s;
+  }
+  .wrong {
+      animation-name: wrong;
+      animation-duration: 1s;
+  }
+  @keyframes wrong {
+      0% {
+          transform: translateX(30px);
+          color: var(--red-dark);
+      }
+      20% {
+          transform: translateX(-30px);
+          color: var(--red-dark);
+      }
+      40% {
+          transform: translateX(20px);
+          color: var(--red-dark);
+      }
+      60% {
+          transform: translateX(-10px);
+          color: var(--red-dark);
+      }
+      80% {
+          transform: translateX(5px);
+          color: var(--red-dark);
+      }
+      100% {
+          transform: translateX(0px);
+          color: var(--red-dark);
+      }
+  }
