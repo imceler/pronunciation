@@ -2,9 +2,6 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-param-reassign */
 // import { listenButton } from '../containers/Game';
-
-
-
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 const grammar = '#JSGF V1.0';
@@ -15,7 +12,6 @@ recognition.lang = 'en-US';
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
 recognition.interimResults = false;
-
 
 class Pronunciation {
   constructor(words, e) {
@@ -31,12 +27,12 @@ class Pronunciation {
 
   start(l) {
     const level = (l == true ? l : this.level);
-    // console.log(e.Match)
+    this.siNO = false;
     this.numberWords = this.words[level].length;
     this.number = Math.floor(Math.random() * this.numberWords);
     this.previousNumber(this.number);
     this.wordToSay = this.numberToWord(this.number, level);
-
+    setTimeout(() => {this.siNo = true}, 1000)
     // this.printLevel(level)
     // this.printPoints(this.points)
     this.preValidation();
@@ -98,6 +94,7 @@ class Pronunciation {
 
   previousNumber(n) {
     this.previous.push(n);
+    // this.siNo = true
   }
 
   noRepeat(number, prev) {
@@ -158,8 +155,8 @@ class Pronunciation {
   }
 
   match() {
-    e.style.display = 'block';
-    setTimeout(() => e.style.display = 'none', 1200);
+    // e.style.display = 'block';
+    // setTimeout(() => e.style.display = 'none', 1200);
     this.increasePoints();
   }
 
@@ -207,6 +204,8 @@ class Pronunciation {
   }
 
   saidToLower(said) {
+    this.siNo = true
+    console.log(this.siNo)
     return said.toLowerCase();
   }
 
@@ -216,8 +215,7 @@ class Pronunciation {
       const wordSaid = event.results[current][0].transcript;
       const wordSay = say;
       const WORD_SAID = self.saidToLower(wordSaid);
-      const luis = () => self.validation(WORD_SAID, wordSay);
-      validation(luis())
+      self.validation(WORD_SAID, wordSay);
     };
   }
 
@@ -232,11 +230,9 @@ class Pronunciation {
           this.increaseLevel();
         }
       }, 1200);
-      return true
     } else {
         console.log('hey, try again')
       this.tryAgain = true
-      return false
     }
   }
 

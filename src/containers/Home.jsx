@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux'
 import '../styles/Home.css';
@@ -12,6 +12,7 @@ const Home = () => {
   let titleWrap = useRef(null);
   let subTitle = useRef(null);
   let playGame = useRef(null);
+
 
   useEffect(() => {
     tm.fromTo(title, 0.6, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'block' });

@@ -15,7 +15,7 @@ const Speak = (props) => {
 
       useEffect(() => {
         tm.fromTo(speakWrap, 1, { opacity: 0 }, { opacity: 1, delay: 0.8 });
-      })
+      }, [])
       
     return (
         <div

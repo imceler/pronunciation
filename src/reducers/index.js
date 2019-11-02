@@ -8,7 +8,7 @@ const reducer = (state, action) => {
         case 'VALIDATION':
             return {
                 ...state,
-                validation: action.payload,
+                matched: action.payload, 
             } 
         default: 
             return state;

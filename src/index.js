@@ -39,9 +39,7 @@ const level3 = [
 ]
 
 const initialState = {  
-    "validation": null,  
-    "word": {},
-    "points": {},
+    "matched": null,  
     "level": [
         level1, 
         level2, 

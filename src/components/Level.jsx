@@ -9,7 +9,7 @@ const Level = (props) => {
 
     useEffect(() => {
         tm.fromTo(playLevel, 1, { x: -200, opacity: 0 }, { x: 0, opacity: 1 });
-      });
+      }, []);
 
     return (
     <div className='play--level' ref={(l) => { playLevel = l; }}>

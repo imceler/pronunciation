@@ -9,7 +9,7 @@ const Points = (props) => {
 
     useEffect(() => {
         tm.fromTo(playPoints, 1, { x: -200, opacity: 0 }, { x: 0, opacity: 1, delay: 0.6 });
-    })
+    }, [])
 
         return(
             <div className='play--points' ref={(p) => { playPoints = p; }}>
