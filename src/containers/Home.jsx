@@ -15,10 +15,10 @@ const Home = () => {
 
 
   useEffect(() => {
-    tm.fromTo(title, 0.6, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'block' });
-    tm.fromTo(titleWrap, 0.6, { height: '10%', display: 'none' }, { height: '60%', display: 'flex' });
-    tm.fromTo(subTitle, 0.6, { y: -200, opacity: 0, display: 'none' }, { y: 0, opacity: 1, display: 'flex', delay: -0.2 });
-    tm.fromTo(playGame, 0.6, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'flex', delay: -0.2 });
+    tm.fromTo(title, 0.8, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'block' });
+    tm.fromTo(titleWrap, 0.8, { height: '10%', display: 'none' }, { height: '60%', display: 'flex' });
+    tm.fromTo(subTitle, 0.8, { y: -200, opacity: 0, display: 'none' }, { y: 0, opacity: 1, display: 'flex', delay: -0.2 });
+    tm.fromTo(playGame, 0.8, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'flex', delay: -0.2 });
   }, []);
 
   return (

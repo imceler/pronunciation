@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Game.css';
-import { validation } from '../actions'
+import { validation, increasePoints, resetPoints, setNextLevel, levelUp} from '../actions'
 import { TweenMax } from 'gsap';
-// import Pronunciation from '../logic/game';
 import Points from '../components/Points'
 import Words from '../components/Words'
 import Speak from '../components/Speak'
 import Level from '../components/Level'
+import LevelUp from '../components/LevelUp'
+
 
 const tm = TweenMax;
 
@@ -24,16 +25,13 @@ recognition.interimResults = false;
 
 const Game = (props) => {
   const { words } = props;
-  // const [Validation, setValidation] = useState(null)
-  // const [Start, setstart] = useState(true)
   class Pronunciation {
     constructor(words, e) {
       this.tryAgain = false
       this.words = words;
       this.previous = [];
-      this.level = 0;
-      this.subLevel = 6;
-      this.points = 0;
+      this.level = props.actualLevel;
+      this.subLevel = 1;
       this.startSpeak = this.startSpeak.bind(this);
       this.readOut = this.readOut.bind(this);
     }  
@@ -43,14 +41,9 @@ const Game = (props) => {
       this.number = Math.floor(Math.random() * this.numberWords);
       this.previousNumber(this.number);
       this.wordToSay = this.numberToWord(this.number, level);
-      // this.printLevel(level)
-      // this.printPoints(this.points)
+
       this.preValidation();
-  
-      // this.listen()
-      // this.speakBtn.addEventListener('click', () => this.startSpeak())
-  
-      // this.speakEnd();
+      
     }
   
     // eslint-disable-next-line class-methods-use-this
@@ -72,36 +65,19 @@ const Game = (props) => {
       this.previousNumber(numberChecked);
       this.wordToSay = this.numberToWord(numberChecked, level);
   
-      // this.printWords();
       this.preValidation();
-  
-      // this.speakBtn.addEventListener('click', () => this.startSpeak());
-  
-      // recognition.onspeechend = function () {
-      //   recognition.stop();
-      //   speakBtn.textContent = 'Press to speak';
-      //   speakBtn.style.color = '#1FAB89';
-      //   speak.style.background = '#FFF';
-      // };
+
     }
   
     nextLevel(level) {
+
       this.numberWords = words[level].length;
       this.number = Math.floor(Math.random() * this.numberWords);
       this.wordToSay = this.numberToWord(this.number, level);
       this.previousNumber(this.number);
   
-      this.printWords();
       this.preValidation();
   
-      this.speakBtn.addEventListener('click', () => this.startSpeak());
-  
-      recognition.onspeechend = function () {
-        recognition.stop();
-        speakBtn.textContent = 'Press to speak';
-        speakBtn.style.color = '#1FAB89';
-        speak.style.background = '#FFF';
-      };
     }
   
     previousNumber(n) {
@@ -133,15 +109,7 @@ const Game = (props) => {
       speakBtn.style.color = '#FF8080';
       speakWrap.style.background = '#C6F1D6';
     }
-  
-    // printPoints(points) {
-    //   this.pointsDiv.textContent = points;
-    // }
-  
-    printLevel(level) {
-      this.levelWrap.textContent = level + 1;
-    }
-  
+    
     numberToWord(n, level) {
       switch (n) {
         case n:
@@ -159,28 +127,17 @@ const Game = (props) => {
   
       window.speechSynthesis.speak(speech);
     }
-  
-    increasePoints() {
-      this.points++;
-      // this.printPoints(this.points);
-    }
-  
-    resetPoints() {
-      this.points = 0;
-      this.printPoints(this.points);
-    }
-  
+    
     resetPrevious() {
       this.previous = [];
     }
   
     increaseLevel() {
-      this.level++;
-      this.levelUp();
+      props.setNextLevel(true)
     }
   
     levelUp() {
-      tl.fromTo(this.upAlert, 1, { display: 'none', opacity: '0', x: '-120px' }, { display: 'flex', opacity: '1', x: '0px' });
+      
   
       divs.returnArrow.addEventListener('click', () => {
         tl.fromTo(divs.home, 1.5, { display: 'none', opacity: '0' }, { display: 'flex', opacity: '1' })
@@ -225,22 +182,24 @@ const Game = (props) => {
     validation(Said, Say) {
       // eslint-disable-next-line eqeqeq
       if (Said == Say) {
+        props.increasePoints();
         props.validation(true)
-        this.increasePoints();
+        
         setTimeout(() => {
-          if (this.points < this.subLevel) {
+          console.log(props.points)
+          if (props.points < this.subLevel) {
             this.nextPoint(this.level);
           } else {
+
             this.increaseLevel();
+          
           }
         }, 1200);
+
       } else {
-          console.log('hey, try again')
           props.validation(false)
       }
     }
-
-
   }
   
   const Game = new Pronunciation(words);
@@ -260,48 +219,43 @@ const Game = (props) => {
 
   return (
     <>
-      <section
+      <main
         id='game'
         className='section--play'
-        // ref={(g) => { game = g; }}
       >
       <Level level={print.level}/>
 
       <Words 
         word={print.word} 
         read={action.read}
-        // validation={Validation}
       />
 
-      <Points points={print.points}/>
+      <Points points={props.points} />
 
       <Speak start={action.speak} end={action.speakEnd}/>
+    
+      {props.nextLevel && (
+        <LevelUp />
+      )}
 
-      <div id='upAlert' className='play--level-up'>
-        <div className='level-up--wrap'>
-          <div id='return' className='level-up--return' />
-          <h2>
-              Level {' '}
-            <span id='actualLevel' />
-              {' '} complete
-            </h2>
-          <h4>It was amazing</h4>
-          <div id='levelUp' className='next-level'>
-            <h3>Next Level</h3>
-          </div>
-        </div>
-      </div>
-    </section>
+    </main>
     </>
   );
 };
+
 const mapDispatchToProps = {
   validation,
+  increasePoints,
+  resetPoints,
+  levelUp,
+  setNextLevel,
 }
 const mapStateToProps = (state) => {
   return {
-    // word: state.word,
     words: state.level,
+    points: state.points,
+    nextLevel: state.nextLevel,
+    actualLevel: state.actualLevel,
   };
 };
 
