@@ -1,4 +1,6 @@
 @import './game.css';
+@import './MediaPoints.css';
+
 
 :root {
     --green-dark: #1FAB89;
@@ -6,6 +8,21 @@
     --red-light: #FFBA92;
     --red-dark: #FF8080;
 }
+
+@custom-media --large screen and (max-width: 1200px);
+@custom-media --semi-large screen and (max-width: 1024px);
+@custom-media --medium-large screen and (max-width: 900px);
+@custom-media --mid screen and (max-width: 890px) and (min-width: 767px);
+@custom-media --medium screen and (max-width: 768px);
+@custom-media --little screen and (max-width: 724px) and (min-width: 561px);
+@custom-media --mid-min screen and (max-width: 670px) and (min-width: 561px);
+@custom-media --semi-small screen and (max-width: 560px);
+@custom-media --small screen and (max-width: 480px);
+@custom-media --mid-small screen and (max-width: 450px) and (min-width: 381px);
+@custom-media --extra-mid-small screen and (max-width: 415px) and (min-width: 381px);
+@custom-media --extra-small screen and (max-width: 380px);  
+@custom-media --small-phone screen and (max-width: 320px);
+
 *,
 ::after,
 ::before {
@@ -22,16 +39,69 @@ main {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    font-size: 55px;
+}
+
+@media (--large) {
+    main {
+        font-size: 50px;
+    }
+}
+@media (--semi-large) {
+    main {
+        font-size: 45px;
+    }
+}
+@media (--medium-large) {
+    main {
+        font-size: 40px;
+    }
+}
+@media (--medium) {
+    main {
+        font-size: 38px;
+    }
+}
+@media (--semi-small) {
+    main {
+        font-size: 35px;
+    }
+}
+@media (--small) {
+    main {
+        font-size: 28px;
+    }
+}
+@media (--extra-small) {
+    main {
+        font-size: 25px;
+    }
+}
+@media (--small-phone) {
+    main {
+        font-size: 22px;
+    }
 }
 .section--home {
     margin: 0 auto;
     width: 100vw;
-    height: 70vh;
+    height: 65vh;
     display: grid;
-    grid-template: 1fr 1fr 1fr / 1fr 2fr 1fr;
+    grid-template: 2fr 1.5fr 1fr / 1fr 2fr 1fr;
+    gap: .6em 0;
+}
+@media (--medium) {
+    .section--home  {
+        height: 60vh;
+    }
+}
+@media (--small) {
+    .section--home  {
+        height: 55vh;
+    }
 }
 .section--title-wrap {
-    grid-column: 2 / 2;
+    grid-column: 1 / 4;
     display: flex;
     justify-self: flex-start;
     flex-direction: column;
@@ -45,40 +115,43 @@ main {
     justify-content: center;
     align-items: center;
 }
+.section__div--title h1 {
+    display: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
 .section__div--subtitle {
-    grid-column: 2 / 2;
+    grid-column: 1 / 4;
     width: 100%;
     display: none;
     justify-content: center;
     align-items: center;
 }
 .section__div--subtitle h3 {
-  font-size: 40px;
+  font-size: .9em;
   font-weight: 100;
-}
-.section__div--title h1 {
-    display: none;
-    font-size: 80px;
-    font-weight: bold;
 }
 .section--play-wrap {
     grid-column: 2 / 2;
     grid-row: 2 / 2;
     display: flex;
-    justify-content: flex-end;
+    padding: 0 .3em;
+    justify-content: flex-start;
     flex-direction: column;
+    box-sizing: border-box;
     width: 100%;
 }
 .section__div--play {
     background: var(--red-light);
     height: 52%;
-    border-radius: 50px;
+    border-radius: 1em;
+
     display: none;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 .section__div--play h3 {
-    font-size: 40px;
+    font-size: .8em;
     font-weight: 300;
 }
