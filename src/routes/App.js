@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import Home from '../containers/Home'
-import Game from '../containers/Game'
+import Game from '../containers/GameContainer'
 
 const App = () => (
     <BrowserRouter>

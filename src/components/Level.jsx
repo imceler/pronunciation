@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { TweenMax } from 'gsap';
+import { connect } from 'react-redux';
 import '../styles/components/Level.css'
 
 const tm = TweenMax;
 
-const Level = (props) => {
+const Level = props => {
     let playLevel = useRef(null);
 
     useEffect(() => {
@@ -21,4 +22,9 @@ const Level = (props) => {
     )
 }
 
-export default Level
+const mapStateToProps = state => {
+  return {
+    level: state.level,
+  }
+}
+export default connect(mapStateToProps, null)(Level)

@@ -1,29 +1,44 @@
+import { actionNames } from '../actions/index'
+
 const reducer = (state, action) => {
     switch (action.type) { 
-        case 'VALIDATION':
+        case actionNames.validation:
             return {
                 ...state,
                 matched: action.payload, 
             } 
-        case 'INCREASE_POINTS':
+        case actionNames.increasePoints:
             return {
                 ...state,
                 points: state.points + 1, 
             } 
-        case 'RESET_POINTS':
+        case actionNames.resetPoints:
             return {
                 ...state,
                 points: 0, 
             } 
-        case 'SET_NEXT_LEVEL':
+        case actionNames.levelUp:
             return {
                 ...state,
-                points: action.payload, 
+                level: state.level + 1, 
             } 
-        case 'LEVEL_UP':
+        case actionNames.levelAlert:
             return {
                 ...state,
-                actualLevel: state.actualLevel + 1, 
+                nextLevel: action.payload, 
+            } 
+        case actionNames.addWordToSay:
+            return {
+                ...state,
+                word: state.word = action.payload 
+            } 
+        case actionNames.resetGame:
+            return {
+                ...state,
+                word: state.word = '',
+                points: state.points = 0,
+                level: state.level = 0,
+                nextLevel: state.nextLevel = false,
             } 
         default: 
             return state;

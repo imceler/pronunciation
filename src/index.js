@@ -13,7 +13,7 @@ const level1 = [
     'Black',
     'White',
     'Purple',
-    'Pink',
+    'Orange',
     'Brown'
 ]
 const level2 = [
@@ -39,11 +39,12 @@ const level3 = [
 ]
 
 const initialState = {  
+    "word": '',
     "nextLevel": false,
-    "actualLevel": 0,
+    "level": 0,
     "points": 0,
     "matched": null,  
-    "level": [
+    "words": [
         level1, 
         level2, 
         level3 

@@ -12,8 +12,8 @@ const Words = (props) => {
     let Word = useRef(null);
     let listenButton = useRef(null);
 
-    let wrong = ''
-    
+    var wrong = ''
+
     if (props.matched === false) {
         wrong = 'wrong'
         setTimeout(() => {
@@ -36,7 +36,7 @@ const Words = (props) => {
 
     const listenNow = () => {
         tm.fromTo(listenButton, 1, { background: 'transparent' }, { background: '#FF8080' });
-        props.read(props.word);
+        props.read(props.wordToSay);
         tm.fromTo(listenButton, 1, { background: '#FF8080' }, { background: 'transparent', delay: 1 });
       };
 
@@ -49,7 +49,7 @@ const Words = (props) => {
             <div className='play--word-match' ref={(x) => { Match = x; }} />
             
             <h2 id='words' className={wrong} ref={(w) => { Word = w; }}>
-            { props.word }
+                { props.wordToSay }
             </h2>
             <div className='icon-wrap' ref={(lb) => { listenButton = lb; }}>
             <i
@@ -67,6 +67,7 @@ const Words = (props) => {
 const mapStateToProps = state => {
     return {
         matched: state.matched,
+        wordToSay: state.word
     }
 }
 

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { TweenMax } from 'gsap';
+import { connect } from 'react-redux';
 import '../styles/components/Points.css'
 
 const tm = TweenMax;
@@ -25,4 +26,10 @@ const Points = (props) => {
         )
 }
 
-export default Points
+const mapStateToProps = state => {
+    return {
+        points: state.points
+    }
+}
+
+export default connect(mapStateToProps, null)(Points)

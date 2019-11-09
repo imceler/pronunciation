@@ -1,18 +1,20 @@
-import React, { useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { resetGame } from '../actions'
 import '../styles/Home.css';
 import { TweenMax } from 'gsap';
 
 const tm = TweenMax;
 
-const Home = () => {
-  let home = useRef(null);
+const Home = props => {
+
+  props.resetGame()
+
   let title = useRef(null);
   let titleWrap = useRef(null);
   let subTitle = useRef(null);
   let playGame = useRef(null);
-
 
   useEffect(() => {
     tm.fromTo(title, 0.8, { x: -200, opacity: 0, display: 'none' }, { x: 0, opacity: 1, display: 'block' });
@@ -22,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main id='home' ref={(h) => { home = h; }}>
+    <main id='home'>
       <section className='section--home'>
         <div className='section--title-wrap'>
           <div
@@ -30,7 +32,7 @@ const Home = () => {
               className='section__div--title'
               ref={(title) => { titleWrap = title ; }}
             >
-              <h1 id='title' ref={(tit) => { title = tit; }}>PRONUNCIATION</h1>
+              <h1 ref={(tit) => { title = tit; }}>PRONUNCIATION</h1>
             </div>
           <div
               id='subTitle'
@@ -43,7 +45,6 @@ const Home = () => {
         <div className='section--play-wrap'>
           <Link
             to='/game'
-            id='play-game'
             className='section__div--play'
             ref={(play) => { playGame = play ; }}
           >
@@ -55,5 +56,8 @@ const Home = () => {
   );
 };
 
-// export default connect(null, null)(Home)
-export default Home;
+const mapDispatchToProps = {
+  resetGame
+}
+
+export default connect(null, mapDispatchToProps )(Home)

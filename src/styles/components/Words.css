@@ -43,6 +43,7 @@
   .play--word h2 {
       font-size: 50px;
       font-weight: bold;
+      transition: 1s;
   }
   .icon-wrap {
     width: 70px;
