@@ -1,13 +1,104 @@
 :root {
-  --margin: 4%;
+  --margin: 6%;
 }
+
+@custom-media --large screen and (max-width: 1200px);
+@custom-media --semi-large screen and (max-width: 1024px);
+@custom-media --medium-large screen and (max-width: 900px);
+@custom-media --mid screen and (max-width: 890px) and (min-width: 767px);
+@custom-media --medium screen and (max-width: 768px);
+@custom-media --little screen and (max-width: 724px) and (min-width: 561px);
+@custom-media --mid-min screen and (max-width: 670px) and (min-width: 561px);
+@custom-media --semi-small screen and (max-width: 560px);
+@custom-media --small screen and (max-width: 480px);
+@custom-media --mid-small screen and (max-width: 450px) and (min-width: 381px);
+@custom-media --extra-mid-small screen and (max-width: 415px) and (min-width: 381px);
+@custom-media --extra-small screen and (max-width: 380px);  
+@custom-media --small-phone screen and (max-width: 320px);
 
 * {
     margin: 0;
     color: var(--green-dark);
     font-family: Century Gothic;
 }
-input {
+
+.section__play-wrap {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: var(--red-light);
+   height: 100vh;
+   width: 100vw;
+}
+
+.section--play {
+  background-color: var(--red-light);
+  /* margin: 0 auto; */
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 60px;
+}
+@media (--large) {
+  .section--play {
+      font-size: 50px;
+      width: 65%;
+  }
+}
+@media (--semi-large) {
+  .section--play {
+      font-size: 45px;
+      width: 70%;
+  }
+}
+@media (--medium-large) {
+  .section--play {
+      font-size: 40px;
+      width: 74%;
+  }
+}
+@media (--medium) {
+  .section--play {
+      font-size: 38px;
+      width: 78%;
+  }
+}
+@media (--semi-small) {
+  .section--play {
+      font-size: 35px;
+      width: 80%;
+  }
+}
+@media (--small) {
+  .section--play {
+      font-size: 28px;
+      width: 82%;
+  }
+  :root {
+    --margin: 10%;
+  }
+}
+@media (--extra-small) {
+  .section--play {
+      font-size: 25px;
+      width: 84%;
+  }
+  :root {
+    --margin: 12%;
+  }
+}
+@media (--small-phone) {
+  .section--play {
+      font-size: 22px;
+      width: 90%;
+  }
+}
+
+/* input {
   width: 250px;
   height: 50px;
   border-radius: 30px;
@@ -21,6 +112,6 @@ button {
   height: 50px;
   border-radius: 30px;
   border: none;
-}
+} */
 
 

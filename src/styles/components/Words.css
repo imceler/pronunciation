@@ -1,6 +1,8 @@
 .play--word {
+  /* grid-column: 2 / 4;
+  grid-row: 2 / 2; */
     margin-bottom: var(--margin);
-      width: 42%;
+      width: 76%;
       height: 15%;
       background: var(--green-light);
       border-radius: 50px;
@@ -12,11 +14,11 @@
   }
   .play--word-match {
     background-image: url('../../media/match.svg');
-    background-size: 50px 50px;
-    width: 50px;
-    height: 50px;
+    background-size: .9em .9em;
+    width: .9em;
+    height: .9em;
     position: absolute;
-    left: 60px;
+    left: 1em;
     display: none;
     animation: matched 1s ease-in-out;
   }
@@ -41,18 +43,18 @@
     }
   }
   .play--word h2 {
-      font-size: 50px;
+      font-size: .9em;
       font-weight: bold;
       transition: 1s;
   }
   .icon-wrap {
-    width: 70px;
-    height: 70px;
+    width: 1.1em;
+    height: 1.1em;
     border-radius: 100px;
     cursor: pointer;
     background-color: transparent;
     position: absolute;
-    right: 30px;
+    right: .5em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,9 +62,9 @@
   }
   .icon {
     background-image: url('../../media/volumen.svg');
-    background-size: 50px 50px;
-    width: 50px;
-    height: 50px;
+    background-size: .9em .9em;
+    width: .9em;
+    height: .9em;
     transition: .3s;
   }
   .wrong {

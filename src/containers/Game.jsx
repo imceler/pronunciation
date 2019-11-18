@@ -6,28 +6,33 @@ import Speak from '../components/Speak';
 import Level from '../components/Level';
 import LevelModal from '../components/LevelModal';
 
+import '../styles/Game.css';
+
 const GameVisual = props => {
  return(
     <>
+      <div className="section__play-wrap">
       <main id='game' className='section--play'>
-      <Level />
 
-      <Words read={props.read} />
+          <Level />
 
-      <Points />
+          <Words read={props.read} />
 
-      <Speak start={props.speakStart} end={props.speakEnd} />
+          <Points />
 
-      <form onSubmit={props.submit}>
-        <input type="text" name="color" onChange={props.change}></input>
-        <button type="submit">Press</button>
-      </form>
-    
-      {props.levelUp && (
-        <LevelModal start={props.again} />
-      )}
+          <Speak start={props.speakStart} end={props.speakEnd} />
+
+          {/* <form onSubmit={props.submit}>
+            <input type="text" name="color" onChange={props.change}></input>
+            <button type="submit">Press</button>
+          </form> */}
+        
+          {props.levelUp && (
+            <LevelModal start={props.again} />
+            )}
 
       </main>
+        </div>
     </>
  )   
 }

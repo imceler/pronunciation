@@ -1,7 +1,3 @@
-@import './game.css';
-@import './MediaPoints.css';
-
-
 :root {
     --green-dark: #1FAB89;
     --green-light: #C6F1D6;
@@ -32,7 +28,7 @@
     overflow: hidden;
     text-decoration: none;
 }
-main {
+.main {
     background: var(--green-light);
     min-height: 100vh;
     display: flex;
@@ -43,42 +39,42 @@ main {
 }
 
 @media (--large) {
-    main {
+    .main {
         font-size: 50px;
     }
 }
 @media (--semi-large) {
-    main {
+    .main {
         font-size: 45px;
     }
 }
 @media (--medium-large) {
-    main {
+    .main {
         font-size: 40px;
     }
 }
 @media (--medium) {
-    main {
+    .main {
         font-size: 38px;
     }
 }
 @media (--semi-small) {
-    main {
+    .main {
         font-size: 35px;
     }
 }
 @media (--small) {
-    main {
+    .main {
         font-size: 28px;
     }
 }
 @media (--extra-small) {
-    main {
+    .main {
         font-size: 25px;
     }
 }
 @media (--small-phone) {
-    main {
+    .main {
         font-size: 22px;
     }
 }

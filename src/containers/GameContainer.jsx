@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import '../styles/Game.css';
+// import '../styles/Game.css';
 import { validation, increasePoints, resetPoints, levelAlert, levelUp, addWordToSay } from '../actions'
 import GameVisual from './Game'
 
@@ -200,15 +200,15 @@ const Game = (props) => {
     speakEnd: Game.speakEnd,   
   };
 
-  var toText = ''
+  // var toText = ''
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    Game.validation(toText)
-  }
-  const handleChange = e => {
-    toText = e.target.value
-  }
+  // const handleSubmit = e => {
+  //   e.preventDefault()
+  //   Game.validation(toText)
+  // }
+  // const handleChange = e => {
+  //   toText = e.target.value
+  // }
 
   return (
     <GameVisual 
@@ -216,8 +216,8 @@ const Game = (props) => {
       read={action.read} 
       speakStart={action.speak}
       speakEnd={action.speakEnd}
-      change={handleChange} 
-      submit={handleSubmit}
+      // change={handleChange} 
+      // submit={handleSubmit}
     />
   );
 };

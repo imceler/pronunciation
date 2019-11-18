@@ -24,7 +24,7 @@ const Home = props => {
   }, []);
 
   return (
-    <main id='home'>
+    <main id='home' className='main'>
       <section className='section--home'>
         <div className='section--title-wrap'>
           <div

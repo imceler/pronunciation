@@ -1,8 +1,16 @@
+@custom-media --mid-min screen and (max-width: 670px) and (min-width: 561px);
+@custom-media --semi-small screen and (max-width: 560px);
+@custom-media --small screen and (max-width: 480px);
+@custom-media --extra-small screen and (max-width: 380px);  
+@custom-media --small-phone screen and (max-width: 320px);
+
 .play--speak {
+    /* grid-column: 2 / 4;
+    grid-row: 4 / 4; */
     margin-bottom: var(--margin);
-    border-radius: 75px;
-    width: 32%;
-    height: 24%;
+    border-radius: 80px;
+    width: 60%;
+    height: 26%;
     background: #FFF;
     opacity: 0;
     display: flex;
@@ -12,7 +20,30 @@
     transition: .5s;
 }
 .play--speak h4 {
-    font-size: 45px;
+    font-size: .7em;
     font-weight: 100;
     transition: .5s;
+}
+
+/* @media (--mid-min) {
+    .play--speak h4 {
+        font-size: .8em;
+    }
+} */
+@media (--semi-small) {
+    .play--speak h4 {
+        font-size: .7em;
+    }
+}
+@media (--small) {
+    .play--speak {
+        width: 65%;
+        height: 24%;
+    }
+}
+@media (--extra-small) {
+    .play--speak {
+        width: 70%;
+        height: 22%;
+    }
 }
