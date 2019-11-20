@@ -40,6 +40,11 @@ const reducer = (state, action) => {
                 level: state.level = 0,
                 nextLevel: state.nextLevel = false,
             } 
+        case actionNames.setConfirmation:
+            return {
+                ...state,
+                confirmation: state.confirmation = action.payload,
+            } 
         default: 
             return state;
      }

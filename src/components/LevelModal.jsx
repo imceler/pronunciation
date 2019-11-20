@@ -1,19 +1,32 @@
 import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { TweenMax } from 'gsap';
-import { levelUp, levelAlert } from '../actions'
-import '../styles/components/levelModal.css'
+import { levelUp, levelAlert, setConfirmation } from '../actions'
+
+import Confirmation from './Confirmation'
+
+import '../styles/components/LevelModal.css'
 
 const tm = TweenMax;
 
-const levelModal = props => {
-  const modal = document.getElementById('modal')
+const LevelModal = props => {
+  const modal = document.getElementById('level-modal')
   let upAlert = useRef(null)
 
   const [next, setNext] = React.useState(false)
+
+  const fadeOut = () => {
+    upAlert.style.display = 'none'
+    modal.style.display = 'none'
+  }
+
+  const confirmation = () => {
+    props.setConfirmation(true)
+    fadeOut()
+  }
 
   const nextLevel = () => {
     setNext(true)
@@ -24,20 +37,10 @@ const levelModal = props => {
     fadeOut()
   };
   
-  const fadeOut = () => {
-    upAlert.style.display = 'none'
-    // tm.fromTo(upAlert, 1, { display: 'flex' }, { display: 'none'})
-    modal.style.display = 'none'
-  }
-
     let alertClasses = classNames({
       'play--level-modal': true,
-      'next': next
+      'next': next,
     })
-
-   const click = () => {
-
-   }
 
   useEffect(() => {
     tm.fromTo(modal, 1, {display: 'none'}, {display: 'flex'})
@@ -49,14 +52,22 @@ const levelModal = props => {
         <div className={alertClasses} ref={ (l) => {upAlert = l} }>
         <div className='level-modal--wrap'>
           
-          <Link onClick={fadeOut} to={'/'} >
+          <div onClick={() => {fadeOut(); confirmation()}}>
             <div className='level-modal--return' />
-          </Link>
+          </div>
 
-          <h2> 
-            Level complete
-            </h2>
+          <h2>Level complete</h2>
           <h4>It was amazing</h4>
+
+        <div className="buttons-wrap">
+
+        <div 
+            className='back-home' 
+            onClick={() => {fadeOut(); confirmation()}}>
+              <h3>
+                Back Home
+              </h3>
+          </div>
 
           <div className='next-level'>
             <h3 onClick={() => {    
@@ -66,23 +77,31 @@ const levelModal = props => {
               Next Level
             </h3>
           </div>
+
+          </div>
         </div>
       </div>
+
+      {/* {props.confirmation && (
+        <Confirmation/>
+      )} */}
       </>
       ,
-      document.getElementById('modal')
+      document.getElementById('level-modal')
     )
 }
 
 const mapDispatchToProps = {
   levelUp,
-  levelAlert
+  levelAlert,
+  setConfirmation,
 }
 
 const mapStateToProps = state => {
   return {
     level: state.level,
+    confirmation: state.confirmation,
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(levelModal)
+export default connect(mapStateToProps, mapDispatchToProps)(LevelModal)

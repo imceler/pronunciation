@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { resetGame } from '../actions'
+import { resetGame, setConfirmation } from '../actions'
 import '../styles/Home.css';
 import { TweenMax } from 'gsap';
 
@@ -9,7 +9,10 @@ const tm = TweenMax;
 
 const Home = props => {
 
-  props.resetGame()
+  useEffect(() => {
+    props.setConfirmation(false)
+    props.resetGame()
+  }, [])
 
   let title = useRef(null);
   let titleWrap = useRef(null);
@@ -57,7 +60,8 @@ const Home = props => {
 };
 
 const mapDispatchToProps = {
-  resetGame
+  resetGame,
+  setConfirmation,
 }
 
 export default connect(null, mapDispatchToProps )(Home)

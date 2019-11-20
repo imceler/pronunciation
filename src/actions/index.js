@@ -5,7 +5,8 @@ export const actionNames = {
     levelUp: 'LEVEL_UP',
     levelAlert:'LEVEL_ALERT',
     addWordToSay: 'ADD_WORD_TO_SAY', 
-    resetGame: 'RESET_GAME'
+    resetGame: 'RESET_GAME',
+    setConfirmation: 'SET_CONFIRMATION'
 }
 
 export const validation = payload => ({
@@ -34,5 +35,9 @@ export const addWordToSay = payload => ({
 })
 export const resetGame = payload => ({
     type: actionNames.resetGame,
+    payload,
+})
+export const setConfirmation = payload => ({
+    type: actionNames.setConfirmation,
     payload,
 })

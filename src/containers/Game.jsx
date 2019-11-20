@@ -4,6 +4,7 @@ import Points from '../components/Points';
 import Words from '../components/Words';
 import Speak from '../components/Speak';
 import Level from '../components/Level';
+import Confirmation from '../components/Confirmation';
 import LevelModal from '../components/LevelModal';
 
 import '../styles/Game.css';
@@ -31,6 +32,9 @@ const GameVisual = props => {
             <LevelModal start={props.again} />
             )}
 
+          {props.confirmation && (
+            <Confirmation/>
+          )}
       </main>
         </div>
     </>
@@ -39,7 +43,8 @@ const GameVisual = props => {
 
 const mapStateToProps = state => {
   return {
-    levelUp: state.nextLevel
+    levelUp: state.nextLevel,
+    confirmation: state.confirmation,
   }
 }
 

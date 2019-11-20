@@ -40,10 +40,11 @@ const level3 = [
 
 const initialState = {  
     "word": '',
-    "nextLevel": false,
+    "nextLevel": true,
     "level": 0,
     "points": 0,
     "matched": null,  
+    "confirmation": false,
     "words": [
         level1, 
         level2, 
