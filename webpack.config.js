@@ -63,7 +63,9 @@ module.exports = {
             chunkFilename: 'styles/[id].[hash].css'
           }),
           new AddAssetHtmlPlugin({
-            filepath: path.resolve(__dirname, 'dist/js/*.js')
+            filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
+            outputPath: 'js',
+            // publicPath: 'http://localhost:3001/'
         }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ["**/main.*"]

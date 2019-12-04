@@ -33,7 +33,7 @@ const Confirmation = props => {
         <>
             <div className="confirmation-modal" ref={cm => {contentWrap = cm}}>
                 <div className="text-wrap">
-                    <h2>Are you sure you want to leave?</h2>
+                    <h2>Are you sure do you want to leave?</h2>
                     <h4>You are about to lose your progress</h4>
                 </div>
 

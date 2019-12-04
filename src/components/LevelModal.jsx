@@ -1,12 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
-// import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { TweenMax } from 'gsap';
 import { levelUp, levelAlert, setConfirmation } from '../actions'
-
-import Confirmation from './Confirmation'
 
 import '../styles/components/LevelModal.css'
 
@@ -43,8 +40,8 @@ const LevelModal = props => {
     })
 
   useEffect(() => {
-    tm.fromTo(modal, 1, {display: 'none'}, {display: 'flex'})
-    tm.fromTo(upAlert, 1, { display: 'none', opacity: 0, x: -120 },
+    tm.fromTo(modal, .6, {display: 'none'}, {display: 'flex'})
+    tm.fromTo(upAlert, .6, { display: 'none', opacity: 0, x: -120 },
     { display: 'flex', opacity: 1, x: 0 });
   }, [])
   return ReactDOM.createPortal(
@@ -81,10 +78,6 @@ const LevelModal = props => {
           </div>
         </div>
       </div>
-
-      {/* {props.confirmation && (
-        <Confirmation/>
-      )} */}
       </>
       ,
       document.getElementById('level-modal')

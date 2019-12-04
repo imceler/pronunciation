@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore} from 'redux';  
+import { createStore } from 'redux';  
 import App from './routes/App'
 import reducer from './reducers/index'
 
@@ -37,10 +37,9 @@ const level3 = [
     'They',
     'We'
 ]
-
 const initialState = {  
     "word": '',
-    "nextLevel": true,
+    "nextLevel": false,
     "level": 0,
     "points": 0,
     "matched": null,  

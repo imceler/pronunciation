@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import '../styles/Game.css';
 import { validation, increasePoints, resetPoints, levelAlert, levelUp, addWordToSay } from '../actions'
 import GameVisual from './Game'
 
@@ -22,15 +21,14 @@ const Game = (props) => {
     constructor(words) {
       this.words = words;
       this.previous = [];
-      this.points = 0
+      this.points = 0;
       this.level = 0;
-      this.subLevel = 2;
+      this.subLevel = 6;
       this.startSpeak = this.startSpeak.bind(this);
       this.readOut = this.readOut.bind(this);
     }  
     start(level = this.level) {
       if (this.points === 0) {
-        
         this.numberWords = this.words[level].length;
         this.number = Math.floor(Math.random() * this.numberWords);
         
@@ -70,16 +68,16 @@ const Game = (props) => {
     }
   
     noRepeat(number, prev) {
-        function is (a, n) {
+        const isIn = (a, n) => {
             let found = a.find(element => element == n)
             return found >= 0
         }
         if (prev.length >= 1) {
-            let isThere = is(prev, number)
+            let isThere = isIn(prev, number)
             if (isThere) {             
                 do {
                     this.number = Math.floor(Math.random() * this.numberWords)
-                    var isIt = is(prev, this.number)
+                    var isIt = isIn(prev, this.number)
                 } while(isIt)
                 return this.number
             } else {
@@ -199,6 +197,8 @@ const Game = (props) => {
     speak: Game.startSpeak,
     speakEnd: Game.speakEnd,   
   };
+
+  // para prueba
 
   // var toText = ''
 

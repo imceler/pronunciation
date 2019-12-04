@@ -28,7 +28,7 @@ const GameVisual = props => {
             <button type="submit">Press</button>
           </form> */}
         
-          {props.levelUp && (
+          {props.nextLevel && (
             <LevelModal start={props.again} />
             )}
 
@@ -43,7 +43,7 @@ const GameVisual = props => {
 
 const mapStateToProps = state => {
   return {
-    levelUp: state.nextLevel,
+    nextLevel: state.nextLevel,
     confirmation: state.confirmation,
   }
 }
