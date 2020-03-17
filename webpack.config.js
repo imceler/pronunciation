@@ -11,14 +11,31 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].[hash].js',
-        publicPath: '/',
+        // publicPath: '/',
         // publicPath: 'pronunciation',
         chunkFilename: 'js/[id].[chunkhash].js'
     },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-      },
-      resolve: {
+        splitChunks: {
+            chunks: 'async',
+            name: true,
+            cacheGroups: {
+                vendors: {
+                    name: 'vendors',
+                    chunks: 'all',
+                    reuseExistingChunk: true,
+                    priority: 1,
+                    filename: 'js/vendors.[hash].js',
+                    test(module, chunks) {
+                        const name = module.nameForCondition && module.nameForCondition();
+                        return chunks.some((chunk) => chunk.name !== 'vendor' && /[\\/]node_modules[\\/]/.test(name));
+                    },
+                },
+            } 
+        }
+    },
+    resolve: {
         extensions: ['.js', '.jsx']
     },
     module: {
@@ -42,11 +59,12 @@ module.exports = {
             {
                 test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
                 use: {
-                    loader: 'url-loader',
+                    loader: 'file-loader',
                     options: {
-                        limit: 1000,
-                        name: '[hash].[ext]',
-	                    outputPath: 'assets'
+                        // limit: 1000,
+                        publicPath: 'assets/',
+                        outputPath: 'styles/assets/',
+                        name: '[hash].[ext]'
                     }
                 }
             }
@@ -65,7 +83,7 @@ module.exports = {
           new AddAssetHtmlPlugin({
             filepath: path.resolve(__dirname, 'dist/js/*.dll.js'),
             outputPath: 'js',
-            // publicPath: 'http://localhost:3001/'
+            publicPath: '/'
         }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ["**/main.*"]

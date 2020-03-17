@@ -6,12 +6,16 @@ import Speak from '../components/Speak';
 import Level from '../components/Level';
 import Confirmation from '../components/Confirmation';
 import LevelModal from '../components/LevelModal';
+import { setConfirmation } from '../actions'
+import ReturnArrow from '../components/ReturnArrow';
 
 import '../styles/Game.css';
 
 const GameVisual = props => {
- return(
+
+ return( 
     <>
+      <ReturnArrow />
       <div className="section__play-wrap">
       <main id='game' className='section--play'>
 
@@ -41,6 +45,10 @@ const GameVisual = props => {
  )   
 }
 
+const mapDispatchToProps = {
+  setConfirmation,
+}
+
 const mapStateToProps = state => {
   return {
     nextLevel: state.nextLevel,
@@ -48,4 +56,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(GameVisual)
+export default connect(mapStateToProps, mapDispatchToProps)(GameVisual)

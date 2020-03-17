@@ -79,9 +79,9 @@
       width: 42%;
       height: 50%;
     }
-    .level-modal--return {
+    /* .level-modal--return {
       display: none;
-    }
+    } */
   }
   @media (--medium-large) {
     .modal {
@@ -167,16 +167,7 @@
     align-items: center;
     flex-direction: column;
   }
-  .level-modal--return {
-    background-image: url('../../media/arrow.svg');
-    background-size: .8em .8em;
-    width: .8em;
-    height: .8em;
-    position: absolute;
-    left: .6em;
-    top: .4em;
-    cursor: pointer;
-  }
+
   .play--level-modal h2 {
     color: #508DB3;
     font-size: .8em;

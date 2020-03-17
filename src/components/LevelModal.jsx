@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { TweenMax } from 'gsap';
 import { levelUp, levelAlert, setConfirmation } from '../actions'
+import ReturnArrow from './ReturnArrow'
 
 import '../styles/components/LevelModal.css'
 
@@ -49,9 +50,7 @@ const LevelModal = props => {
         <div className={alertClasses} ref={ (l) => {upAlert = l} }>
         <div className='level-modal--wrap'>
           
-          <div onClick={() => {fadeOut(); confirmation()}}>
-            <div className='level-modal--return' />
-          </div>
+        <ReturnArrow />
 
           <h2>Level complete</h2>
           <h4>It was amazing</h4>
