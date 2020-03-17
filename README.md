@@ -11,12 +11,13 @@ A SPA game that help you to improve your speaking-listening skills and learn som
 - Postcss
 - Gsap (Animation library)
 
+<div align='center'>
+
 <h6 style="text-align: center;">Mockoup made in adobe XD</h6>
 
 ---
 
 <h6 style="text-align: center;">Hey, Look how it looks on Instagram</h6>
 
-<div align='center'>
- [Instagram](https://www.instagram.com/gstv_ca/)
+ https://www.instagram.com/gstv_ca/
 </div>
